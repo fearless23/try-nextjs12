@@ -18,16 +18,16 @@ export const ThemeProvider: React.FC = (props) => {
   const data = {
     colorScheme: value,
     toggleTheme,
-  }
+  };
 
   return (
     <ThemeContext.Provider value={data}>
       {props.children}
     </ThemeContext.Provider>
-  )
+  );
 };
 
 export const useTheme = () => {
   const data = useContext(ThemeContext);
   return data;
-}
+};

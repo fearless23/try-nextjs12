@@ -1,14 +1,12 @@
-import { Title } from '@mantine/core'
-import type { NextPage } from 'next'
+import { Title } from '@mantine/core';
+import type { NextPage } from 'next';
 
-const Notifications: NextPage = () => {
-  
-  
+const Notifications: NextPage = () => {  
   return (
     <>
       <Title>Notifications</Title>
     </>
-  )
-}
+  );
+};
 
-export default Notifications
+export default Notifications;

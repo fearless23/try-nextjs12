@@ -74,8 +74,8 @@ const data = [
 ];
 
 interface Props {
-  // hidden: boolean;
-  setHidden: (value: boolean) => void;
+  // eslint-disable-next-line no-unused-vars
+  setHidden: (hidden: boolean) => void;
 }
 
 export const LeftNavbar = (props: Props) => {
@@ -91,7 +91,7 @@ export const LeftNavbar = (props: Props) => {
       onClick={(event) => {
         event.preventDefault();
         setActive(item.label);
-        router.push(`/${item.link}`)
+        router.push(`/${item.link}`);
         props.setHidden(true);
       }}
     >

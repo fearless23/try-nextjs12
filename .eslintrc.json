@@ -1,3 +1,39 @@
 {
-  "extends": "next/core-web-vitals"
+  "extends": "next/core-web-vitals",
+  "rules": {
+    "semi": [
+      "error",
+      "always"
+    ],
+    "camelcase": "off",
+    "comma-dangle": "off",
+    "indent": [
+      "error",
+      2
+    ],
+    "no-unused-expressions":"error",
+    "no-unused-vars":"error",
+    "prefer-const": [
+      "error",
+      {
+        "destructuring": "any",
+        "ignoreReadBeforeAssign": false
+      }
+    ],
+    "max-params": [
+      "error",
+      5
+    ],
+    "max-len": [
+      "error",
+      {
+        "code": 210,
+        "ignoreTrailingComments": true,
+        "ignoreUrls": true,
+        "ignoreStrings": true,
+        "ignoreTemplateLiterals": true,
+        "ignoreRegExpLiterals": true
+      }
+    ]
+  }
 }

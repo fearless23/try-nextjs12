@@ -61,7 +61,6 @@ export const Shell: React.FC = (props) => {
         </Header>
       }
     >
-
       <div>
         {props.children}
       </div>
