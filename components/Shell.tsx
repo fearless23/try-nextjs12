@@ -1,46 +1,70 @@
 import { useState } from 'react';
-import { AppShell, Burger, Header, MediaQuery, Navbar, Text, useMantineTheme } from '@mantine/core';
 import { LeftNavbar } from './LeftNavbar';
+import {
+  AppShell,
+  Burger,
+  createStyles,
+  Header,
+  MediaQuery,
+  Navbar,
+  Text,
+  useMantineTheme
+} from '@mantine/core';
 
+const useStyles = createStyles((theme) => {
+  return {
+    navbar: {
+      backgroundColor: theme.colors[theme.primaryColor][6],
+    },
+
+    header: {
+      backgroundColor: theme.colors[theme.primaryColor][6],
+      color: theme.white,
+    },
+  };
+});
 
 export const Shell: React.FC = (props) => {
-  const [opened, setOpened] = useState(false);
+  const { classes } = useStyles();
   const theme = useMantineTheme();
+  const [opened, setOpened] = useState(false);
 
   return (
     <AppShell
-      // navbarOffsetBreakpoint controls when navbar should no longer be offset with padding-left
-      navbarOffsetBreakpoint="sm"
-      // fixed prop on AppShell will be automatically added to Header and Navbar
       fixed
+      navbarOffsetBreakpoint="sm"
       navbar={
-        <LeftNavbar hidden={!opened} setHidden={(i: boolean) => setOpened(!i)} />
+        <Navbar
+          className={classes.navbar}
+          p="md"
+          hiddenBreakpoint="sm"
+          hidden={!opened}
+          width={{ sm: 240 }}
+        >
+          <LeftNavbar setHidden={(i) => setOpened(!i)} />
+        </Navbar>
       }
       header={
-        <Header height={70} p="md">
-          {/* Handle other responsive styles with MediaQuery component or createStyles function */}
-          <div style={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            height: '100%'
-          }}>
-            <Text>Application header</Text>
+        <Header height={70} p="md" className={classes.header}>
+          <div style={{ display: 'flex', alignItems: 'center', height: '100%' }}>
             <MediaQuery largerThan="sm" styles={{ display: 'none' }}>
               <Burger
                 opened={opened}
                 onClick={() => setOpened((o) => !o)}
                 size="sm"
-                color={theme.colors.gray[6]}
+                color={theme.white}
                 mr="xl"
               />
             </MediaQuery>
-
+            <Text>Reporting Portal</Text>
           </div>
         </Header>
       }
     >
-      {props.children}
+
+      <div>
+        {props.children}
+      </div>
     </AppShell>
   );
 };

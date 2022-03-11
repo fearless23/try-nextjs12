@@ -13,7 +13,13 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "preserve",
-    "incremental": true
+    "incremental": true,
+    "baseUrl": ".",
+    "paths": {
+      "@cmps/*": ["components/*"], // This mapping is relative to "baseUrl"
+      "@lib/*": ["lib/*"], // This mapping is relative to "baseUrl"
+      "@styles/*": ["styles/*"], // This mapping is relative to "baseUrl"
+    }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
   "exclude": ["node_modules"]

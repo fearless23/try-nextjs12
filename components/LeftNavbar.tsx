@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { createStyles, Navbar, Group, Code } from '@mantine/core';
+import { createStyles, Navbar } from '@mantine/core';
 import {
   FaBell,
   FaFingerprint,
@@ -11,25 +11,12 @@ import {
   FaKey
 } from 'react-icons/fa';
 
-import {
-  FiSettings
-} from 'react-icons/fi';
-
-// import { MantineLogo } from '../../shared/MantineLogo';
+import { FiSettings } from 'react-icons/fi';
+import { useRouter } from 'next/router';
 
 const useStyles = createStyles((theme, _params, getRef) => {
   const icon = getRef('icon');
   return {
-    navbar: {
-      backgroundColor: theme.colors[theme.primaryColor][6],
-    },
-
-    version: {
-      backgroundColor: theme.colors[theme.primaryColor][7],
-      color: theme.white,
-      fontWeight: 700,
-    },
-
     header: {
       paddingBottom: theme.spacing.md,
       marginBottom: theme.spacing.md * 1.5,
@@ -77,21 +64,22 @@ const useStyles = createStyles((theme, _params, getRef) => {
 });
 
 const data = [
-  { link: '', label: 'Notifications', icon: FaBell },
-  { link: '', label: 'Billing', icon: FaReceipt },
-  { link: '', label: 'Security', icon: FaFingerprint },
-  { link: '', label: 'SSH Keys', icon: FaKey },
-  { link: '', label: 'Databases', icon: FaDatabase },
-  { link: '', label: 'Authentication', icon: FaDiceTwo },
-  { link: '', label: 'Other Settings', icon: FiSettings },
+  { link: 'notifications', label: 'Notifications', icon: FaBell },
+  { link: 'billing', label: 'Billing', icon: FaReceipt },
+  { link: 'security', label: 'Security', icon: FaFingerprint },
+  { link: 'ssh', label: 'SSH Keys', icon: FaKey },
+  { link: 'databases', label: 'Databases', icon: FaDatabase },
+  { link: 'auth', label: 'Authentication', icon: FaDiceTwo },
+  { link: 'settings', label: 'Other Settings', icon: FiSettings },
 ];
 
 interface Props {
-  hidden: boolean;
+  // hidden: boolean;
   setHidden: (value: boolean) => void;
 }
 
 export const LeftNavbar = (props: Props) => {
+  const router = useRouter();
   const { classes, cx } = useStyles();
   const [active, setActive] = useState('Billing');
 
@@ -103,6 +91,7 @@ export const LeftNavbar = (props: Props) => {
       onClick={(event) => {
         event.preventDefault();
         setActive(item.label);
+        router.push(`/${item.link}`)
         props.setHidden(true);
       }}
     >
@@ -112,27 +101,8 @@ export const LeftNavbar = (props: Props) => {
   ));
 
   return (
-    <Navbar
-      fixed
-      position={{ top: 0, left: 0 }}
-      // height={700}
-      className={classes.navbar}
-      p="md"
-      // Breakpoint at which navbar will be hidden if hidden prop is true
-      hiddenBreakpoint="sm"
-      // Hides navbar when viewport size is less than value specified in hiddenBreakpoint
-      hidden={props.hidden}
-      // when viewport size is less than theme.breakpoints.sm navbar width is 100%
-      // viewport size > theme.breakpoints.sm – width is 300px
-      // viewport size > theme.breakpoints.lg – width is 400px
-      width={{ sm: 300, lg: 400 }}
-    >
+    <>
       <Navbar.Section grow>
-        <Group className={classes.header} position="apart">
-          {/* <MantineLogo variant="white" /> */}
-          <div>Mantine</div>
-          <Code className={classes.version}>v3.1.2</Code>
-        </Group>
         {links}
       </Navbar.Section>
 
@@ -147,6 +117,6 @@ export const LeftNavbar = (props: Props) => {
           <span>Logout</span>
         </a>
       </Navbar.Section>
-    </Navbar>
+    </>
   );
 };
